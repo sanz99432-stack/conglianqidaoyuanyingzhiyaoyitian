@@ -1,0 +1,51 @@
+(function(root){
+'use strict';
+const TAU=Math.PI*2,W=390,H=720;
+const SHEETS={spellfx:[8,8,156.75],palm:[4,2,443.5],elemental:[4,4,256],motionfx:[8,6,128],mechanicfx:[4,6,128],biomefx:[6,6,128],skin:[3,2,384],wordmark:[1,1,512],lettering:[2,4,256],biomes:[7,6,96],pack:[4,4,128],explore:[4,3,128],hero:[8,4,96],enemies:[4,6,96],bosses:[2,3,144],terrain:[3,2,192],vfx:[4,4,96],vfx2:[4,4,96],props:[3,2,192],icons:[4,2,96],ultimate:[4,4,128],enemyvfx:[4,4,96],loot:[5,2,96],worldprops:[4,2,192]};
+function install(Game){if(Game.prototype._presentationInstalled)return;Game.prototype._presentationInstalled=true;const P=Game.prototype,oldRender=P.render,oldSprite=P.pixelSprite,oldBattle=P.renderBattle,oldPanel=P.panel;
+ P.initArt=function(){if(this.art)return;this.art={};this.artLoaded=0;this.artFailed=0;const factory=this.options.createImage||(typeof root.Image==='function'?()=>new root.Image():null);if(this.options.images){for(const name of Object.keys(SHEETS)){this.art[name]={image:this.options.images[name],ready:!!this.options.images[name]};if(this.art[name].ready)this.artLoaded++;}return;}if(!factory)return;for(const name of Object.keys(SHEETS)){const image=factory();const entry=this.art[name]={image,ready:false};image.onload=()=>{entry.ready=true;this.artLoaded++;};image.onerror=()=>{this.artFailed++;this.toast('美术资源加载失败，请重新打开游戏');};image.src='assets/'+name+'.png';}};
+ P.sprite=function(sheet,index,x,y,w,h,angle=0,alpha=1){const entry=this.art&&this.art[sheet];if(!entry||!entry.ready)return false;const [cols,,cell]=SHEETS[sheet],c=this.ctx;c.save();c.globalAlpha*=alpha;c.translate(Math.round(x),Math.round(y));if(angle)c.rotate(angle);c.drawImage(entry.image,(index%cols)*cell,Math.floor(index/cols)*cell,cell,cell,Math.round(-w/2),Math.round(-h/2),Math.round(w),Math.round(h));c.restore();return true;};
+ P.skillIcon=function(id,x,y,size){return this.sprite('icons',['sword','fire','orbit','thunder','ice','wave','heal','speed'].indexOf(id),x,y,size,size);};
+ P.shadow=function(x,y,w,alpha=.25){const c=this.ctx;c.save();c.fillStyle=`rgba(4,10,12,${alpha})`;c.beginPath();c.ellipse(x,y,w,w*.32,0,0,TAU);c.fill();c.restore();};
+ P.pixelSprite=function(x,y,type,color,scale=1,entity){this.initArt();let ok=false;
+  if(type==='hero'){let row=0,frame=0;const battle=['playing','paused','upgrade','dead','result','treasure'].includes(this.state)&&this.player;if(battle){frame=this.moving?Math.floor((this.walkPhase||0)*8)%8:(this.walkPhase>.5?4:0);row=this.visualRow||0;}this.shadow(x,y+14*scale,14*scale,.32);ok=this.sprite('hero',row*8+frame,x,y-16*scale,62*scale,62*scale);}
+  else if(type.startsWith('creature-')){const index=Number(type.split('-')[1]),frame=(Math.floor(this.time*(index===4?10:7))+(entity?entity.id:0))%4;const size=(index===2?62:index===4?54:50)*scale;this.shadow(x,y+11*scale,size*.26);ok=this.sprite('enemies',index*4+frame,x,y-11*scale,size,size);if(entity&&entity.flash>0&&ok){this.ctx.save();this.ctx.globalCompositeOperation='lighter';this.sprite('enemies',index*4+frame,x,y-11*scale,size,size,0,.22);this.ctx.restore();}}
+  else if(type.startsWith('boss-')){const index=Number(type.split('-')[1]),breath=1+Math.sin(this.clock*2)*.02;this.shadow(x,y+22,37,.4);ok=this.sprite('bosses',index,x,y-21,110*breath,110/breath);}
+  if(!ok)oldSprite.call(this,x,y,type,color,scale);
+ };
+ P.scenery=function(home=false){this.initArt();const c=this.ctx,stage=home?this.save.selected:(this.stage||0),p=home?{x:0,y:0}:this.player||{x:0,y:0},ox=W/2-p.x,oy=H*.48-p.y;
+  this.rect(0,0,W,H,['#274035','#46392e','#2f414b','#342c42','#3f3e39','#46584d'][stage]);
+  const entry=this.art.terrain,size=256;if(entry&&entry.ready){for(let y=Math.floor(-oy/size);y<(H-oy)/size;y++)for(let x=Math.floor(-ox/size);x<(W-ox)/size;x++){const tx=x*size+ox,ty=y*size+oy;c.save();c.translate(tx+(x%2?size:0),ty+(y%2?size:0));c.scale(x%2?-1:1,y%2?-1:1);c.drawImage(entry.image,(stage%3)*192,Math.floor(stage/3)*192,192,192,0,0,size,size);c.restore();}}
+  this.rect(0,0,W,H,home?'#071a14b8':'#09191850');
+  for(const d of this.decor){const x=d.x+ox,y=d.y+oy;if(x<-130||x>W+130||y<-80||y>H+180)continue;const prop=d.type<2?stage:d.type===2?2:d.type===3?4:stage===5?5:stage;const height=(d.type<2?130:85)*d.scale;if(home){if(y<220||y>420)continue;}this.shadow(x,y+10,height*.24,.2);this.sprite('props',prop,x,y-height*.36,height,height,0,home?.65:.86);}
+  if(home)this.sprite('props',5,W/2,346,188,188,0,.34);
+  else {c.strokeStyle='#d8c69266';c.lineWidth=3;c.strokeRect(-1000+ox,-1000+oy,2000,2000);}
+  // Airborne motes add life while keeping attack telegraphs and silhouettes readable.
+  for(let i=0;i<14;i++){const x=(i*97+Math.sin(this.clock*.3+i)*20+W*2)%W,y=(i*63-this.clock*5+H*100)%H;c.globalAlpha=.15+Math.sin(this.clock+i)*.08;this.rect(x,y,2,2,'#f6e6ad');}c.globalAlpha=1;
+ };
+ // Compact pixel silhouette: no animated aura on each sword, even during dense volleys.
+ P.drawSword=function(x,y,angle=0,ultimate=false,scale=1,trail=false){const c=this.ctx;c.save();c.translate(Math.round(x),Math.round(y));c.rotate(angle);c.scale(scale,scale);if(trail){c.strokeStyle=ultimate?'#d4c17c55':'#9fbfaf40';c.lineWidth=1;c.beginPath();c.moveTo(-9,0);c.lineTo(ultimate?-19:-15,0);c.stroke();}c.fillStyle='#27433b';c.beginPath();c.moveTo(-5,-3);c.lineTo(8,-3);c.lineTo(13,0);c.lineTo(8,3);c.lineTo(-5,3);c.closePath();c.fill();c.fillStyle=ultimate?'#dfd7a1':'#aecdbf';c.beginPath();c.moveTo(-4,-2);c.lineTo(8,-2);c.lineTo(12,0);c.lineTo(8,2);c.lineTo(-4,2);c.closePath();c.fill();this.rect(-4,-1,13,1,ultimate?'#f4edc9':'#e4efe5');this.rect(-7,-4,2,8,ultimate?'#c8a657':'#91aa85');this.rect(-11,-1,4,3,'#365b4b');this.rect(-12,-1,1,3,'#b8a572');c.restore();};
+ P.renderProjectile=function(b,q){if(!b.enemy&&b.art==='sword'){this.drawSword(q.x,q.y,Math.atan2(b.vy,b.vx),!!b.ultimate,b.ultimate?1.1:1,true);return;}const c=this.ctx;if(b.enemy){c.save();c.translate(q.x,q.y);c.rotate(Math.atan2(b.vy,b.vx)+Math.PI/2);c.fillStyle=b.color;c.shadowColor=b.color;c.shadowBlur=7;if(b.art==='talisman'){this.rect(-4,-8,8,16,'#e9d9a6');this.rect(-1,-5,2,8,'#aa648e');}else{c.beginPath();c.moveTo(0,-8);c.lineTo(5,0);c.lineTo(0,8);c.lineTo(-5,0);c.closePath();c.fill();this.rect(-1,-3,2,6,'#fff1c6');}c.restore();return;}
+  const row=b.art==='fire'?1:0,frame=Math.floor(this.clock*14)%4,angle=Math.atan2(b.vy,b.vx),size=b.art==='fire'?50:54;
+  if(!this.sprite('vfx',row*4+frame,q.x,q.y,size,size,angle))this.rect(q.x-3,q.y-2,12,4,b.color);
+ };
+ P.renderEffect=function(e,q){const c=this.ctx,t=1-e.life/e.max,alpha=Math.min(1,e.life/e.max*1.6);c.save();c.globalAlpha=alpha;
+  if(e.bolt){this.sprite('vfx2',Math.min(3,Math.floor(t*4)),q.x,q.y-58,88,142);this.sprite('vfx',12+Math.min(3,Math.floor(t*4)),q.x,q.y,48,48);}
+  else if(e.art==='ice')this.sprite('vfx',8+Math.min(3,Math.floor(t*4)),q.x,q.y,e.r*1.8,e.r*1.8,0,.65);
+  else if(e.impact)this.sprite('vfx',12+Math.min(3,Math.floor(t*4)),q.x,q.y,e.r*2,e.r*2);
+  else if(e.art==='heal')this.sprite('vfx2',12+Math.min(3,Math.floor(t*4)),q.x,q.y-14,e.r*2,e.r*2,0,.45);
+  else {const r=e.r*(.35+t*.65);c.strokeStyle=e.color;c.lineWidth=e.blast?4:2;c.beginPath();c.arc(q.x,q.y,r,0,TAU);c.stroke();if(e.art==='wave'){this.sprite('vfx2',8+Math.min(3,Math.floor(t*4)),q.x,q.y,r*1.5,r*1.5,0,.42);for(let i=0;i<8;i++){const a=i*TAU/8+this.time;this.rect(q.x+Math.cos(a)*r,q.y+Math.sin(a)*r,3,3,'#fff0ce');}}}
+  c.restore();
+ };
+ P.renderBattle=function(){const c=this.ctx;c.save();c.beginPath();c.rect(0,98,W,H-156);c.clip();for(const t of (this.trails||[]).slice(-20)){const q=this.worldPoint(t);c.globalAlpha=t.life/.16*.08;this.rect(q.x-1,q.y-1,3,3,t.color);}c.globalAlpha=1;
+  for(const h of (this._motionInstalled?[]:(this.hazards||[]))){if(h.biome!==undefined)continue;const q=this.worldPoint(h),progress=1-h.life/h.max;c.fillStyle='#e8786350';c.beginPath();c.arc(q.x,q.y,h.r,0,TAU);c.fill();c.strokeStyle='#ffc2a9';c.lineWidth=2;c.beginPath();c.arc(q.x,q.y,h.r,0,TAU);c.stroke();c.strokeStyle='#f09b78';c.lineWidth=4;c.beginPath();c.arc(q.x,q.y,h.r-5,-Math.PI/2,-Math.PI/2+TAU*progress);c.stroke();}
+  for(const e of (this._motionInstalled?[]:this.enemies)){const q=this.worldPoint(e);if(e.phase==='warn'){c.save();c.translate(q.x,q.y);c.rotate(e.dashAngle);c.fillStyle='#ee9a6960';c.fillRect(0,-11,145,22);c.strokeStyle='#ffc6a0';c.strokeRect(0,-11,145,22);c.restore();}if(e.phase==='armed'){c.fillStyle='#e3816555';c.beginPath();c.arc(q.x,q.y,60,0,TAU);c.fill();c.strokeStyle='#f2b586';c.stroke();}}
+  if(this.skills.orbit)this.sprite('vfx2',4+Math.floor(this.clock*4)%4,W/2,H*.48,114+this.skills.orbit*8,114+this.skills.orbit*8,this.clock*.15,.18);
+  c.restore();oldBattle.call(this);c.save();c.beginPath();c.rect(0,98,W,H-156);c.clip();for(const p of (this.particles||[]).slice(-(this.visualDense?24:55))){const q=this.worldPoint(p);c.globalAlpha=Math.min(.55,p.life/p.max);this.rect(q.x,q.y,p.size,p.size,p.color);}c.globalAlpha=1;if(this.shake>0)this.rect(0,98,W,H-156,'#ffe5b30b');c.restore();
+  if(!this.wave)this.text(`妖潮 ${Math.min(7,1+Math.floor(this.time/45))}  /  ${Math.min(6,this.unlockedTypes())} 类妖物`,W/2,H-74,10,'#ddd5b6','center');
+ };
+ P.panel=function(x,y,w,h,color,stroke){oldPanel.call(this,x,y,w,h,color,stroke);const c=this.ctx;c.strokeStyle=stroke||'#567653';c.lineWidth=1;for(const [cx,cy,dx,dy] of [[x+3,y+3,1,1],[x+w-3,y+3,-1,1],[x+3,y+h-3,1,-1],[x+w-3,y+h-3,-1,-1]]){c.beginPath();c.moveTo(cx,cy+dy*9);c.lineTo(cx,cy);c.lineTo(cx+dx*9,cy);c.stroke();}}
+ P.render=function(){this.initArt();oldRender.call(this);if(this.artLoaded<Object.keys(SHEETS).length&&this.options.platform){this.text(this.artFailed?'美术加载失败，请刷新':'正在载入美术资源…',W/2,697,10,'#dcc797','center');}};
+}
+const api={install,SHEETS};if(typeof module!=='undefined')module.exports=api;else root.XiuxianPresentation=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
