@@ -11,8 +11,8 @@ P.pixelSprite=function(x,y,type,color,size,e){if(e&&e.flash>0&&e.kind!=='obstacl
 P.openCodex=function(){open.call(this);this.joy=null;this.keys={};this.catalogTab='skills';this.bagDetail=null;this.skillDemo=null;this.previewMode='normal';};
 P.openBag=function(){bag.call(this);this.catalogTab='skills';this.bagDetail=null;this.skillDemo=null;this.previewMode='normal';};
 P.selectCatalogItem=function(item){this.bagDetail=item;this.previewMode=item.kind==='relic'?'evolved':'normal';this.skillDemo=null;this.previewLoops=0;};
-P.createSkillDemo=function(id,mode){if(!this.art||!Object.values(this.art).every(a=>a.ready))return null;
- const images={};for(const [key,value]of Object.entries(this.art))images[key]=value.image;
+P.createSkillDemo=function(id,mode){if(!this.art||!(this.getArtProgress?this.getArtProgress().ready:Object.values(this.art).every(a=>a.ready)))return null;
+ const images={};for(const [key,value]of Object.entries(this.art))if(value.ready)images[key]=value.image;
  const g=new Game(this.canvas,{width:390,height:720,images,preview:true});g.start(0);g.initArt();g.bossSpawned=true;g.wave.phase='boss';g.time=12;g.xpNeed=Infinity;g.player.invincible=9999;g.enemies=[];g.obstacles=[];g.events=[];g.refreshChunks=()=>{};g.messages=[];for(const s of SKILLS)g.skills[s.id]=0;
  const level=mode==='normal'?1:6;for(let i=0;i<level;i++)g.choose(id);if(mode==='evolved'&&RELICS.some(r=>r.id===id)){g.relics[id]=true;g.checkEvolutions();}g.player.hp=Math.floor(g.player.maxHp*.55);g.floaters=[];g.messages=[];g.previewRefill=0;
  return {game:g,key:id+':'+mode,elapsed:0,id,mode};
