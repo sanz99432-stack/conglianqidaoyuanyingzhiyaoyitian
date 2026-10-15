@@ -1,0 +1,323 @@
+{
+  "hero": {
+    "file": "assets/hero.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 96,
+    "width": 768,
+    "height": 384,
+    "anchor": [
+      48,
+      19
+    ]
+  },
+  "enemies": {
+    "file": "assets/enemies.png",
+    "cols": 4,
+    "rows": 6,
+    "cell": 96,
+    "width": 384,
+    "height": 576
+  },
+  "bosses": {
+    "file": "assets/bosses.png",
+    "cols": 2,
+    "rows": 3,
+    "cell": 144,
+    "width": 288,
+    "height": 432
+  },
+  "terrain": {
+    "file": "assets/terrain.png",
+    "cols": 3,
+    "rows": 2,
+    "cell": 192,
+    "width": 576,
+    "height": 384
+  },
+  "vfx": {
+    "file": "assets/vfx.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 96,
+    "width": 384,
+    "height": 384
+  },
+  "vfx2": {
+    "file": "assets/vfx2.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 96,
+    "width": 384,
+    "height": 384
+  },
+  "props": {
+    "file": "assets/props.png",
+    "cols": 3,
+    "rows": 2,
+    "cell": 192,
+    "width": 576,
+    "height": 384
+  },
+  "icons": {
+    "file": "assets/icons.png",
+    "cols": 4,
+    "rows": 2,
+    "cell": 96,
+    "width": 384,
+    "height": 192
+  },
+  "ultimate": {
+    "file": "assets/ultimate.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 128,
+    "width": 512,
+    "height": 512
+  },
+  "enemyvfx": {
+    "file": "assets/enemyvfx.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 96,
+    "width": 384,
+    "height": 384
+  },
+  "loot": {
+    "file": "assets/loot.png",
+    "cols": 5,
+    "rows": 2,
+    "cell": 96,
+    "width": 480,
+    "height": 192
+  },
+  "worldprops": {
+    "file": "assets/worldprops.png",
+    "cols": 4,
+    "rows": 2,
+    "cell": 192,
+    "width": 768,
+    "height": 384
+  },
+  "explore": {
+    "file": "assets/explore.png",
+    "cols": 4,
+    "rows": 3,
+    "cell": 128,
+    "width": 512,
+    "height": 384
+  },
+  "biomes": {
+    "file": "assets/biomes.png",
+    "cols": 7,
+    "rows": 6,
+    "cell": 96,
+    "width": 672,
+    "height": 576
+  },
+  "pack": {
+    "file": "assets/pack.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 128,
+    "width": 512,
+    "height": 512
+  },
+  "skin": {
+    "file": "assets/skin.png",
+    "cols": 3,
+    "rows": 2,
+    "cell": 384,
+    "width": 1152,
+    "height": 768
+  },
+  "wordmark": {
+    "file": "assets/wordmark.png",
+    "cols": 1,
+    "rows": 1,
+    "cell": 512,
+    "width": 512,
+    "height": 512
+  },
+  "lettering": {
+    "file": "assets/lettering.png",
+    "cols": 2,
+    "rows": 4,
+    "cell": 256,
+    "width": 512,
+    "height": 1024
+  },
+  "biomefx": {
+    "file": "assets/biomefx.png",
+    "cols": 6,
+    "rows": 6,
+    "cell": 128,
+    "width": 768,
+    "height": 768
+  },
+  "mechanicfx": {
+    "file": "assets/mechanicfx.png",
+    "cols": 4,
+    "rows": 6,
+    "cell": 128,
+    "width": 512,
+    "height": 768
+  },
+  "motionfx": {
+    "file": "assets/motionfx.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128,
+    "width": 1024,
+    "height": 768
+  },
+  "spellfx": {
+    "file": "assets/spellfx.png",
+    "cols": 8,
+    "rows": 8,
+    "cell": 156.75,
+    "width": 1254,
+    "height": 1254
+  },
+  "palm": {
+    "file": "assets/palm.png",
+    "cols": 4,
+    "rows": 2,
+    "cell": 443.5,
+    "width": 1774,
+    "height": 887
+  },
+  "elemental": {
+    "file": "assets/elemental.png",
+    "cols": 4,
+    "rows": 4,
+    "cell": 256,
+    "width": 1024,
+    "height": 1024
+  },
+  "qMechanism": {
+    "file": "assets/qMechanism.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 256,
+    "width": 2048,
+    "height": 1536,
+    "source": "quality-preview-v4"
+  },
+  "qMechanismFx": {
+    "file": "assets/qMechanismFx.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 256,
+    "width": 2048,
+    "height": 1536,
+    "source": "quality-preview-v4"
+  },
+  "qUlt": {
+    "file": "assets/qUlt.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qPeople": {
+    "file": "assets/qPeople.png",
+    "cols": 4,
+    "rows": 5,
+    "cell": 256,
+    "width": 1024,
+    "height": 1280,
+    "source": "quality-preview-v4"
+  },
+  "qRobe": {
+    "file": "assets/qRobe.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 128,
+    "width": 1024,
+    "height": 512,
+    "source": "quality-preview-v4"
+  },
+  "qSeal": {
+    "file": "assets/qSeal.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 128,
+    "width": 1024,
+    "height": 512,
+    "source": "quality-preview-v4"
+  },
+  "qOrb": {
+    "file": "assets/qOrb.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 128,
+    "width": 1024,
+    "height": 512,
+    "source": "quality-preview-v4"
+  },
+  "qBoss0": {
+    "file": "assets/qBoss0.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qBoss1": {
+    "file": "assets/qBoss1.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qBoss2": {
+    "file": "assets/qBoss2.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qBoss3": {
+    "file": "assets/qBoss3.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qBoss4": {
+    "file": "assets/qBoss4.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qBoss5": {
+    "file": "assets/qBoss5.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 256,
+    "width": 2048,
+    "height": 1024,
+    "source": "quality-preview-v4"
+  },
+  "qRelics": {
+    "file": "assets/qRelics.png",
+    "cols": 2,
+    "rows": 2,
+    "cell": 128,
+    "width": 256,
+    "height": 256
+  }
+}

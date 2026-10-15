@@ -1,0 +1,137 @@
+[
+  {
+    "output": "hit-flesh-0.mp3",
+    "inputs": [
+      "impactPunch_medium_000.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-wood-0.mp3",
+    "inputs": [
+      "impactWood_medium_000.ogg",
+      "impactSoft_medium_000.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-shell-0.mp3",
+    "inputs": [
+      "impactGlass_medium_000.ogg",
+      "impactPunch_medium_000.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-metal-0.mp3",
+    "inputs": [
+      "impactMetal_medium_000.ogg",
+      "impactSoft_medium_000.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-flesh-1.mp3",
+    "inputs": [
+      "impactPunch_medium_001.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-wood-1.mp3",
+    "inputs": [
+      "impactWood_medium_001.ogg",
+      "impactSoft_medium_001.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-shell-1.mp3",
+    "inputs": [
+      "impactGlass_medium_001.ogg",
+      "impactPunch_medium_001.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-metal-1.mp3",
+    "inputs": [
+      "impactMetal_medium_001.ogg",
+      "impactSoft_medium_001.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-flesh-2.mp3",
+    "inputs": [
+      "impactPunch_medium_002.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-wood-2.mp3",
+    "inputs": [
+      "impactWood_medium_002.ogg",
+      "impactSoft_medium_002.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-shell-2.mp3",
+    "inputs": [
+      "impactGlass_medium_002.ogg",
+      "impactPunch_medium_002.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "hit-metal-2.mp3",
+    "inputs": [
+      "impactMetal_medium_002.ogg",
+      "impactSoft_medium_002.ogg"
+    ],
+    "duration": 0.26
+  },
+  {
+    "output": "enemy-break-0.mp3",
+    "inputs": [
+      "impactPunch_heavy_000.ogg"
+    ],
+    "duration": 0.38
+  },
+  {
+    "output": "enemy-break-1.mp3",
+    "inputs": [
+      "impactPunch_heavy_001.ogg"
+    ],
+    "duration": 0.38
+  },
+  {
+    "output": "tap-v2.mp3",
+    "inputs": [
+      "impactGlass_light_001.ogg"
+    ],
+    "duration": 0.16
+  },
+  {
+    "output": "step-v2.mp3",
+    "inputs": [
+      "footstep_grass_002.ogg"
+    ],
+    "duration": 0.16
+  },
+  {
+    "output": "upgrade-v2.mp3",
+    "inputs": [
+      "magical-1.ogg"
+    ],
+    "duration": 0.85
+  },
+  {
+    "output": "relic-v2.mp3",
+    "inputs": [
+      "magical-2.ogg"
+    ],
+    "duration": 0.85
+  }
+]
