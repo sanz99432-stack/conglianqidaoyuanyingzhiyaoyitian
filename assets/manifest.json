@@ -319,5 +319,53 @@
     "cell": 128,
     "width": 256,
     "height": 256
+  },
+  "relic15": {
+    "file": "assets/relic15.png",
+    "cols": 8,
+    "rows": 4,
+    "cell": 128
+  },
+  "realmfx15": {
+    "file": "assets/realmfx15.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite150": {
+    "file": "assets/elite150.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite151": {
+    "file": "assets/elite151.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite152": {
+    "file": "assets/elite152.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite153": {
+    "file": "assets/elite153.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite154": {
+    "file": "assets/elite154.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "elite155": {
+    "file": "assets/elite155.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
   }
 }
