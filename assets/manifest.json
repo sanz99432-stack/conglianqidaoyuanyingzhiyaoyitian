@@ -403,5 +403,11 @@
     "cols": 8,
     "rows": 3,
     "cell": 128
+  },
+  "treasurelook18": {
+    "file": "assets/treasurelook18.png",
+    "cols": 8,
+    "rows": 7,
+    "cell": 128
   }
 }

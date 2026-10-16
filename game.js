@@ -16,6 +16,8 @@ require('./src/realms-v15').install(engine.Game,require('./src/presentation').SH
 require('./src/upgrade-choice').install(engine.Game,progression.RELICS);
 require('./src/treasures').install(engine.Game,require('./src/presentation').SHEETS,require('./src/expansion').GEAR);
 require('./src/active-treasures').install(engine.Game,require('./src/presentation').SHEETS,require('./src/treasures').LEGENDS);
+require('./src/equipment-appearance').install(engine.Game,require('./src/presentation').SHEETS,require('./src/treasures').LEGENDS);
+require('./src/equipment-preview').install(engine.Game,require('./src/treasures').LEGENDS);
 const audio=new (require('./src/audio.js').AudioManager)(()=>wx.createInnerAudioContext());
 const canvas = wx.createCanvas();
 const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
