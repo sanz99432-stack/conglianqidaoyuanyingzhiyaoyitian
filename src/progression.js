@@ -28,7 +28,7 @@ function install(Game,skills){const P=Game.prototype;if(P._progressionInstalled)
   }
  };
  P.tick=function(dt){const running=this.state==='playing',before=this.player?{x:this.player.x,y:this.player.y,hp:this.player.hp}:null;if(running){
-   for(const zone of this.zones){zone.life-=dt;zone.pulse-=dt;if(zone.pulse<=0){zone.pulse=.5;for(const e of this.enemies)if(e.hp>0&&Math.hypot(e.x-zone.x,e.y-zone.y)<zone.r+e.radius){this.damage(e,zone.damage);if(zone.art==='ice')e.slow=Math.max(e.slow||0,1.6);}}}this.zones=this.zones.filter(z=>z.life>0);
+   for(const zone of this.zones){zone.life-=dt;zone.pulse-=dt;if(zone.pulse<=0){zone.pulse=.5;for(const e of this.enemies)if(e.hp>0&&Math.hypot(e.x-zone.x,e.y-zone.y)<zone.r+e.radius){const previous=this.damageSource;this.damageSource=zone;this.damage(e,zone.damage);this.damageSource=previous;if(zone.art==='ice')e.slow=Math.max(e.slow||0,1.6);}}}this.zones=this.zones.filter(z=>z.life>0);
    // Evolved fireballs leave bounded burn patches once, at their first real hit.
    for(const b of this.bullets)if(b.ember&&!b.burned&&b.hit.size){b.burned=true;this.zones.push({x:b.x,y:b.y,r:48,life:2,pulse:0,art:'fire',damage:13*this.damageScale()});}if(this.zones.length>16)this.zones.splice(0,this.zones.length-16);
    this.ascensionFlash=Math.max(0,this.ascensionFlash-dt);

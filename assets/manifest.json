@@ -367,5 +367,41 @@
     "cols": 8,
     "rows": 6,
     "cell": 128
+  },
+  "legend16": {
+    "file": "assets/legend16.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "minor16": {
+    "file": "assets/minor16.png",
+    "cols": 6,
+    "rows": 2,
+    "cell": 128
+  },
+  "treasurefx16": {
+    "file": "assets/treasurefx16.png",
+    "cols": 8,
+    "rows": 6,
+    "cell": 128
+  },
+  "chest16": {
+    "file": "assets/chest16.png",
+    "cols": 8,
+    "rows": 1,
+    "cell": 128
+  },
+  "activefx17": {
+    "file": "assets/activefx17.png",
+    "cols": 4,
+    "rows": 2,
+    "cell": 256
+  },
+  "activegear17": {
+    "file": "assets/activegear17.png",
+    "cols": 8,
+    "rows": 3,
+    "cell": 128
   }
 }

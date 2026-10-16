@@ -14,6 +14,8 @@ require('./src/clarity.js').install(engine.Game,require('./src/expansion').GEAR)
 require('./src/ascended-combat.js').install(engine.Game);require('./src/approved-art.js').install(engine.Game);require('./src/quality.js').install(engine.Game,require('./src/presentation').SHEETS,progression.RELICS,require('./src/expansion').GEAR);
 require('./src/realms-v15').install(engine.Game,require('./src/presentation').SHEETS);
 require('./src/upgrade-choice').install(engine.Game,progression.RELICS);
+require('./src/treasures').install(engine.Game,require('./src/presentation').SHEETS,require('./src/expansion').GEAR);
+require('./src/active-treasures').install(engine.Game,require('./src/presentation').SHEETS,require('./src/treasures').LEGENDS);
 const audio=new (require('./src/audio.js').AudioManager)(()=>wx.createInnerAudioContext());
 const canvas = wx.createCanvas();
 const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
