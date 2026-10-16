@@ -18,6 +18,7 @@ require('./src/treasures').install(engine.Game,require('./src/presentation').SHE
 require('./src/active-treasures').install(engine.Game,require('./src/presentation').SHEETS,require('./src/treasures').LEGENDS);
 require('./src/equipment-appearance').install(engine.Game,require('./src/presentation').SHEETS,require('./src/treasures').LEGENDS);
 require('./src/equipment-preview').install(engine.Game,require('./src/treasures').LEGENDS);
+require('./src/equipment-hub').install(engine.Game,require('./src/treasures').LEGENDS,require('./src/treasures').MINORS,require('./src/expansion').GEAR);
 const audio=new (require('./src/audio.js').AudioManager)(()=>wx.createInnerAudioContext());
 const canvas = wx.createCanvas();
 const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
