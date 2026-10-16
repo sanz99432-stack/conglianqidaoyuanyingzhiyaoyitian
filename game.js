@@ -13,6 +13,7 @@ require('./src/refinements.js').install(engine.Game,engine.SKILLS,progression.RE
 require('./src/clarity.js').install(engine.Game,require('./src/expansion').GEAR);
 require('./src/ascended-combat.js').install(engine.Game);require('./src/approved-art.js').install(engine.Game);require('./src/quality.js').install(engine.Game,require('./src/presentation').SHEETS,progression.RELICS,require('./src/expansion').GEAR);
 require('./src/realms-v15').install(engine.Game,require('./src/presentation').SHEETS);
+require('./src/upgrade-choice').install(engine.Game,progression.RELICS);
 const audio=new (require('./src/audio.js').AudioManager)(()=>wx.createInnerAudioContext());
 const canvas = wx.createCanvas();
 const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
@@ -45,7 +46,7 @@ function point(t) { return {x:t.clientX,y:t.clientY,id:t.identifier}; }
 wx.onTouchStart(e => e.changedTouches.forEach(t => game.pointerDown(point(t))));
 wx.onTouchMove(e => e.changedTouches.forEach(t => game.pointerMove(point(t))));
 wx.onTouchEnd(e => e.changedTouches.forEach(t => game.pointerUp(point(t))));
-wx.onTouchCancel(e => e.changedTouches.forEach(t => game.pointerUp(point(t))));
+wx.onTouchCancel(e => e.changedTouches.forEach(t => game.pointerCancel(point(t))));
 wx.onHide(() => {audio.visibility(true);game.pause();});
 if(wx.onShow)wx.onShow(()=>audio.visibility(false));
 let last = Date.now();
